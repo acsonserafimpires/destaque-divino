@@ -1,57 +1,67 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Destaque Divino</title>
+          </h2>
 
-  <script src="https://cdn.tailwindcss.com"></script>
+          <p class="text-gray-300">
+            Controle do sistema
+          </p>
 
-  <style>
-    body {
-      background: #f3f4f6;
-      font-family: Arial, sans-serif;
-    }
+        </div>
 
-    .fade {
-      animation: fade .3s ease;
-    }
+        <div class="grid grid-cols-2 gap-4 mb-5">
 
-    @keyframes fade {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
+          <div class="bg-blue-100 p-4 rounded-3xl">
+            <div class="text-3xl font-bold text-blue-700">
+              ${votos.length}
+            </div>
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
-</head>
+            <div class="text-sm text-blue-600 mt-1">
+              Votos registrados
+            </div>
+          </div>
 
-<body>
+          <div class="bg-orange-100 p-4 rounded-3xl">
+            <div class="text-3xl font-bold text-orange-700">
+              ${categorias.length}
+            </div>
 
-<div class="max-w-md mx-auto min-h-screen bg-white shadow-2xl overflow-hidden">
+            <div class="text-sm text-orange-600 mt-1">
+              Categorias
+            </div>
+          </div>
 
-  <!-- HEADER -->
-  <div class="bg-gradient-to-r from-blue-700 to-blue-500 p-5 text-white">
-    <h1 class="text-3xl font-bold">
-      Destaque Divino
-    </h1>
+        </div>
 
-    <p class="opacity-90 mt-1">
-      Vote nas melhores empresas da cidade
-    </p>
-  </div>
+        <div class="space-y-3">
 
-  <!-- APP -->
-  <div id="app"></div>
+          <button class="w-full bg-blue-600 text-white p-4 rounded-2xl font-bold">
+            🏢 Gerenciar Empresas
+          </button>
 
-  <!-- RODAPÉ -->
-  <div class="text-center py-6 text-xs text-gray-400">
-    © Destaque Divino 2026
+          <button class="w-full bg-orange-500 text-white p-4 rounded-2xl font-bold">
+            📂 Gerenciar Categorias
+          </button>
 
-    <div class="mt-2">
+          <button class="w-full bg-green-500 text-white p-4 rounded-2xl font-bold">
+            🎯 Gerenciar Banners
+          </button>
+
+          <button class="w-full bg-purple-500 text-white p-4 rounded-2xl font-bold">
+            📊 Relatórios
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+  } else {
+    alert('Senha incorreta');
+  }
+}
+
+telaInicial();
+
+</script>
+
+</body>
 </html>
