@@ -1,93 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Destaque Divino</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      background: #f3f4f6;
+      font-family: Arial, sans-serif;
+    }
+
+    .fade {
+      animation: fade .3s ease;
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
 
-<body class="bg-gray-100">
+<body>
 
-<div class="max-w-md mx-auto min-h-screen bg-white shadow-xl">
+<div class="max-w-md mx-auto min-h-screen bg-white shadow-2xl overflow-hidden">
 
-  <div class="bg-blue-600 text-white p-5">
-    <h1 class="text-2xl font-bold">
+  <!-- HEADER -->
+  <div class="bg-gradient-to-r from-blue-700 to-blue-500 p-5 text-white">
+    <h1 class="text-3xl font-bold">
       Destaque Divino
     </h1>
 
-    <p class="text-sm opacity-90">
+    <p class="opacity-90 mt-1">
       Vote nas melhores empresas da cidade
     </p>
   </div>
 
-  <div class="p-4">
+  <!-- APP -->
+  <div id="app"></div>
 
-    <div class="bg-orange-500 rounded-3xl p-5 text-white mb-5">
-      <h2 class="text-2xl font-bold mb-2">
-        Premiação Oficial 2026
-      </h2>
+  <!-- RODAPÉ -->
+  <div class="text-center py-6 text-xs text-gray-400">
+    © Destaque Divino 2026
 
-      <p class="mb-4">
-        Escolha as melhores empresas da cidade.
-      </p>
-
-      <button
-        class="bg-white text-orange-600 px-5 py-3 rounded-2xl font-bold w-full">
-        COMEÇAR VOTAÇÃO
-      </button>
-    </div>
-
-    <div class="space-y-4">
-
-      <div class="bg-white rounded-2xl shadow p-4 border">
-        <div class="flex justify-between items-center">
-
-          <div>
-            <h3 class="font-bold text-lg">
-              🥖 Padarias
-            </h3>
-
-            <p class="text-gray-500 text-sm">
-              Vote na melhor padaria
-            </p>
-          </div>
-
-          <button
-            class="bg-green-500 text-white px-4 py-2 rounded-xl">
-            Entrar
-          </button>
-
-        </div>
-      </div>
-
-      <div class="bg-white rounded-2xl shadow p-4 border">
-        <div class="flex justify-between items-center">
-
-          <div>
-            <h3 class="font-bold text-lg">
-              🛒 Mercados
-            </h3>
-
-            <p class="text-gray-500 text-sm">
-              Vote no melhor mercado
-            </p>
-          </div>
-
-          <button
-            class="bg-green-500 text-white px-4 py-2 rounded-xl">
-            Entrar
-          </button>
-
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-</body>
+    <div class="mt-2">
 </html>
