@@ -1,4 +1,357 @@
 <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Destaque Divino</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      background: #f3f4f6;
+      font-family: Arial, sans-serif;
+    }
+
+    .fade {
+      animation: fade .3s ease;
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="max-w-md mx-auto min-h-screen bg-white shadow-2xl overflow-hidden">
+
+  <!-- HEADER -->
+  <div class="bg-gradient-to-r from-blue-700 to-blue-500 p-5 text-white">
+    <h1 class="text-3xl font-bold">
+      Destaque Divino
+    </h1>
+
+    <p class="opacity-90 mt-1">
+      Vote nas melhores empresas da cidade
+    </p>
+  </div>
+
+  <!-- APP -->
+  <div id="app"></div>
+
+  <!-- RODAPÉ -->
+  <div class="text-center py-6 text-xs text-gray-400">
+    © Destaque Divino 2026
+
+    <div class="mt-2">
+      <button onclick="abrirAdmin()" class="hover:text-gray-600 transition">
+        ADN
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+
+const categorias = [
+  {
+    nome: 'Padarias',
+    icon: '🥖',
+    banner: 'https://placehold.co/800x200/orange/white?text=PADARIA+PATROCINADORA',
+    empresas: [
+      'Padaria Central',
+      'Pão Mineiro',
+      'Delícias do Trigo'
+    ]
+  },
+
+  {
+    nome: 'Mercados',
+    icon: '🛒',
+    banner: 'https://placehold.co/800x200/green/white?text=MERCADO+PATROCINADOR',
+    empresas: [
+      'Mercado Silva',
+      'Super Econômico',
+      'Mercadinho Divino'
+    ]
+  },
+
+  {
+    nome: 'Açougues',
+    icon: '🥩',
+    banner: 'https://placehold.co/800x200/red/white?text=AÇOUGUE+PATROCINADOR',
+    empresas: [
+      'Casa de Carnes Divino',
+      'Boi Forte'
+    ]
+  }
+];
+
+let emailUsuario = '';
+let categoriaAtual = 0;
+let votos = [];
+
+function telaInicial() {
+
+  document.getElementById('app').innerHTML = `
+
+    <div class="p-4 fade">
+
+      <div class="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-3xl p-5 text-white shadow-xl mb-5">
+
+        <div class="text-sm uppercase opacity-90 mb-1">
+          Premiação Oficial
+        </div>
+
+        <h2 class="text-3xl font-bold leading-tight mb-3">
+          As empresas mais lembradas da cidade
+        </h2>
+
+        <p class="opacity-95 mb-5">
+          Vote nas melhores empresas de Divino e acompanhe o ranking.
+        </p>
+
+        <button
+          onclick="telaEmail()"
+          class="bg-white text-orange-600 w-full py-4 rounded-2xl font-bold text-lg shadow-lg active:scale-95 transition">
+          COMEÇAR VOTAÇÃO
+        </button>
+
+      </div>
+
+      <div class="bg-gray-100 rounded-2xl p-4">
+
+        <h3 class="font-bold text-lg mb-3">
+          Como funciona?
+        </h3>
+
+        <div class="space-y-3 text-sm text-gray-700">
+          <div>✅ Informe seu e-mail</div>
+          <div>✅ Vote em cada categoria</div>
+          <div>✅ Apenas um voto por categoria</div>
+          <div>✅ Resultado oficial ao final da campanha</div>
+        </div>
+
+      </div>
+
+    </div>
+  `;
+}
+
+function telaEmail() {
+
+  document.getElementById('app').innerHTML = `
+
+    <div class="p-5 fade">
+
+      <button
+        onclick="telaInicial()"
+        class="mb-5 text-blue-600 font-semibold">
+        ← Voltar
+      </button>
+
+      <div class="text-center mb-6">
+
+        <div class="text-6xl mb-4">
+          ✉️
+        </div>
+
+        <h2 class="text-3xl font-bold mb-2">
+          Informe seu e-mail
+        </h2>
+
+        <p class="text-gray-500">
+          Para validar sua participação.
+        </p>
+
+      </div>
+
+      <input
+        type="email"
+        id="email"
+        placeholder="Digite seu e-mail"
+        class="w-full border border-gray-300 rounded-2xl p-4 mb-5 outline-none focus:ring-2 focus:ring-blue-400">
+
+      <button
+        onclick="salvarEmail()"
+        class="bg-blue-600 text-white w-full py-4 rounded-2xl font-bold text-lg shadow-lg active:scale-95 transition">
+        CONTINUAR
+      </button>
+
+    </div>
+  `;
+}
+
+function salvarEmail() {
+
+  const email = document.getElementById('email').value;
+
+  if (!email.includes('@')) {
+    alert('Digite um e-mail válido');
+    return;
+  }
+
+  emailUsuario = email;
+  categoriaAtual = 0;
+
+  abrirCategoria();
+}
+
+function abrirCategoria() {
+
+  const categoria = categorias[categoriaAtual];
+
+  document.getElementById('app').innerHTML = `
+
+    <div class="fade">
+
+      <div class="p-4">
+
+        <div class="flex items-center justify-between mb-4">
+
+          <div>
+            <div class="text-sm text-gray-500">
+              Categoria ${categoriaAtual + 1} de ${categorias.length}
+            </div>
+
+            <h2 class="text-3xl font-bold mt-1">
+              ${categoria.icon} ${categoria.nome}
+            </h2>
+          </div>
+
+          <div class="bg-blue-100 text-blue-700 px-4 py-2 rounded-2xl text-sm font-semibold">
+            ${Math.round(((categoriaAtual + 1) / categorias.length) * 100)}%
+          </div>
+
+        </div>
+
+        <div class="mb-5 overflow-hidden rounded-3xl shadow-lg">
+          <img src="${categoria.banner}" class="w-full">
+        </div>
+
+        <div class="space-y-4">
+
+          ${categoria.empresas.map(empresa => `
+
+            <div class="bg-white border border-gray-100 rounded-3xl p-4 shadow-sm hover:shadow-md transition">
+
+              <div class="flex items-center justify-between gap-3">
+
+                <div>
+                  <div class="font-bold text-lg text-gray-800">
+                    ${empresa}
+                  </div>
+
+                  <div class="text-sm text-gray-500 mt-1">
+                    Empresa participante
+                  </div>
+                </div>
+
+                <button
+                  onclick="votar('${empresa}')"
+                  class="bg-green-500 hover:bg-green-600 text-white px-5 py-3 rounded-2xl font-bold active:scale-95 transition">
+                  VOTAR
+                </button>
+
+              </div>
+
+            </div>
+
+          `).join('')}
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
+}
+
+function votar(empresa) {
+
+  votos.push({
+    email: emailUsuario,
+    categoria: categorias[categoriaAtual].nome,
+    empresa
+  });
+
+  categoriaAtual++;
+
+  if (categoriaAtual >= categorias.length) {
+    telaFinal();
+    return;
+  }
+
+  abrirCategoria();
+}
+
+function telaFinal() {
+
+  document.getElementById('app').innerHTML = `
+
+    <div class="p-5 text-center fade">
+
+      <div class="text-7xl mb-5">
+        🎉
+      </div>
+
+      <h2 class="text-4xl font-bold mb-3">
+        Obrigado por votar!
+      </h2>
+
+      <p class="text-gray-500 mb-6 leading-relaxed">
+        Sua participação foi registrada com sucesso.
+      </p>
+
+      <div class="bg-green-100 text-green-700 rounded-2xl p-4 mb-5 text-left">
+
+        <div class="font-bold mb-2">
+          Seus votos:
+        </div>
+
+        ${votos.map(v => `
+          <div class="mb-1">
+            ✅ ${v.categoria}: ${v.empresa}
+          </div>
+        `).join('')}
+
+      </div>
+
+      <button
+        onclick="window.location.reload()"
+        class="bg-blue-600 text-white w-full py-4 rounded-2xl font-bold text-lg shadow-lg active:scale-95 transition">
+        FINALIZAR
+      </button>
+
+    </div>
+  `;
+}
+
+function abrirAdmin() {
+
+  const senha = prompt('Senha administrador');
+
+  if (senha === '1234') {
+
+    document.getElementById('app').innerHTML = `
+
+      <div class="p-5 fade">
+
+        <div class="bg-gradient-to-r from-slate-900 to-slate-700 text-white rounded-3xl p-5 mb-5 shadow-2xl">
+
+          <h2 class="text-3xl font-bold mb-2">
+            Painel Administrativo
           </h2>
 
           <p class="text-gray-300">
